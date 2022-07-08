@@ -1,5 +1,8 @@
 package com.akash;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,17 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 
-@RestController
+
 @Slf4j
+@RestController
 @RequestMapping("api/v1/customers")
 public record CustomerController(CustomerService serv)
 {
-	private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(CustomerController.class);
-
+	
+	private static final Log logger=LogFactory.getLog(CustomerController.class);
 	@PostMapping
 	public void registerCustomer(@RequestBody CustomerRequest customerRequest)
 	{
-		log.info("Customer for registration {}"+customerRequest);
-		serv.registerCustomer(customerRequest);
+			logger.info("Customer Reuqets objext is "+customerRequest);
+			serv.registerCustomer(customerRequest);
 	}
+	
 }
