@@ -1,0 +1,3 @@
+Time taken by post API Request is around 1.118s
+This is acdeptable depending on our Db performance. If we want to fetch it in high speed , we can increase our Db performance.
+
