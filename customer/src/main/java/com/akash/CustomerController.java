@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.amigoscode.clients.fraud.FraudCheckException;
+
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -19,7 +21,7 @@ public record CustomerController(CustomerService serv)
 	
 	private static final Log logger=LogFactory.getLog(CustomerController.class);
 	@PostMapping
-	public void registerCustomer(@RequestBody CustomerRequest customerRequest)
+	public void registerCustomer(@RequestBody CustomerRequest customerRequest)throws FraudCheckException
 	{
 			logger.info("Customer Reuqets objext is "+customerRequest);
 			serv.registerCustomer(customerRequest);

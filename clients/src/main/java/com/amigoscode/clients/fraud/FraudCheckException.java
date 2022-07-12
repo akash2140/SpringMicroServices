@@ -1,4 +1,4 @@
-package com.akash;
+package com.amigoscode.clients.fraud;
 
 public class FraudCheckException extends Exception 
 {
