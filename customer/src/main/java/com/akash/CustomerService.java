@@ -9,6 +9,8 @@ import org.springframework.web.client.RestTemplate;
 import com.amigoscode.clients.fraud.FraudCheckException;
 import com.amigoscode.clients.fraud.FraudClient;
 import com.amigoscode.clients.fraud.FraudResponse;
+import com.amigoscode.clients.notification.NotificationClient;
+import com.amigoscode.clients.notification.NotificationRequest;
 
 @Service
 public class CustomerService {
@@ -18,9 +20,13 @@ public class CustomerService {
 	
 //	@Autowired
 //	private RestTemplate template;
+	
 //	
 	@Autowired
     FraudClient fraudClient ;
+	
+	@Autowired
+	NotificationClient notificationClient;
 	
 	private static final Log logger=LogFactory.getLog(CustomerService.class);
 	public void registerCustomer(CustomerRequest customerRequest) throws FraudCheckException 
@@ -54,7 +60,17 @@ public class CustomerService {
 			throw new IllegalStateException("Fraudster");
 		
 		
+		//Todo To make it async , add it to queue
+		NotificationRequest notificationRequestObject=new NotificationRequest(customer.getId(),
+																				customer.getEmail(),
+																				String.format("Hi %s, welcome to Amigoscode", customer.getFirstName())
+																				);
+		logger.info("Calling notification Service From Customer");
 		
+		notificationClient.sendNotification(
+					notificationRequestObject
+				);
+		logger.info("notification Sent without Failure From Customer");
 	}
 
 }

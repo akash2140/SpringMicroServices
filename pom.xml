@@ -75,5 +75,6 @@
 		<module>fraud</module>
 		<module>EurekaServer</module>
 		<module>clients</module>
+		<module>notification</module>
 	</modules>
 </project>
