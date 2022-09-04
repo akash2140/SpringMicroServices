@@ -12,7 +12,10 @@ import com.amigoscode.clients.fraud.FraudResponse;
 import com.amigoscode.clients.notification.NotificationClient;
 import com.amigoscode.clients.notification.NotificationRequest;
 
+import lombok.Data;
+
 @Service
+@Data
 public class CustomerService {
 	
 	@Autowired
@@ -33,6 +36,7 @@ public class CustomerService {
 	{
 		// TODO Auto-generated method stub
 		Customer customer=new Customer(customerRequest.firstName(),customerRequest.lastName(),customerRequest.email());
+		
 		FraudResponse requestBody=new FraudResponse(true);
 		repo.save(customer);
 		logger.info(customer.getId());
